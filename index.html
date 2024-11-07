@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Date Picker Function</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+<style>
+    /* General body styling */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+    }
+
+    /* Container styling */
+    .container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+        /* background-color: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+        width: 90%;
+        max-width: 800px;
+    }
+
+    /* Icon and text wrapper styling */
+    .step {
+        text-align: center;
+        position: relative;
+        width: 170px;
+    }
+
+    /* Icon styling */
+    .step i {
+        font-size: 22px;
+        color: black;
+        background-color: #FFF6F8;
+        padding: 15px;
+        border-radius: 50%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+  
+
+    /* Line styling between elements */
+    .line {
+        position: absolute;
+        top: 28%;
+        left: 65%;
+        height: 4px;
+        width: 220px;
+        background-color: #FDF7F8;
+        transform: translateY(-50%);
+        z-index: -1;
+
+    }
+
+    /* Hide last line */
+    .third .line {
+        display: none;
+    }
+
+    /* Date and text styling */
+    .step h3 {
+        margin: 15px 0 5px;
+        font-size: 1.2em;
+        color: #333;
+    }
+
+    .step p {
+        margin: 0;
+        font-size: 0.95em;
+        color: #777;
+    }
+</style>
+
+<div class="container">
+    <div class="step first">
+        <i class="fa-solid fa-cart-plus"></i>
+        <div class="line"></div>
+        <h3 class="date1"></h3>
+        <p>Bestellen</p>
+    </div>
+    <div class="step second">
+        <i class="fa-solid fa-truck"></i>
+        <div class="line"></div>
+        <h3 class="date2"></h3>
+        <p>DHL Versand</p>
+    </div>
+    <div class="step third">
+        <i class="fa-solid fa-heart"></i>
+        <h3 class="date3"></h3>
+        <p>Ausprobieren</p>
+    </div>
+</div>
+
+<script>
+    // Function to format date as DD. Mon.
+    function formatDate(date) {
+        const day = date.getDate().toString().padStart(2, '0');
+        const monthNames = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."];
+        const month = monthNames[date.getMonth()];
+        return `${day}. ${month}`;
+    }
+
+    // Get today's date
+    const today = new Date();
+
+    // Display today's date in the first element
+    document.querySelector(".date1").innerText = formatDate(today);
+
+    // Display today's date and the next day in the second element
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    document.querySelector(".date2").innerText = `${formatDate(today)} - ${formatDate(tomorrow)}`;
+
+    // Display the date two days later in the third element
+    const dayAfterTomorrow = new Date(today);
+    dayAfterTomorrow.setDate(today.getDate() + 2);
+    document.querySelector(".date3").innerText = formatDate(dayAfterTomorrow);
+</script>
+
+</body>
+</html>
